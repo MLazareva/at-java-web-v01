@@ -9,7 +9,8 @@ public class SimpleWikiTest {
     void test01() {
         open("https://ru.wikipedia.org/wiki/Selenium");
         $("body").shouldHave(text("WebDriver"));
-        sleep(10000);;
+        sleep(10000);
+        sleep(20000);
     }
 
 
