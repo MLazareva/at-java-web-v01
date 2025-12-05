@@ -1,12 +1,12 @@
 package packageTest;
 
-import com.codeborne.selenide.Configuration;
+//import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.Test;
 //import org.openqa.selenium.WebDriver;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+//import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class WorkTestTest {
     @Test
