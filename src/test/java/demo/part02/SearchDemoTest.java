@@ -21,7 +21,7 @@ public class SearchDemoTest {
         $(By.name("interests")).shouldBe(visible);
         $(By.className("nav-link")).shouldBe(visible);
         $(By.tagName("input")).shouldBe(visible);
-        $(By.linkText("Контакты и обратная связь")).shouldBe(visible);
+        $(By.linkText("Регистрация нового пользователя в системе")).shouldBe(visible);
         $(By.partialLinkText("длинный")).shouldBe(visible);
     }
 }
