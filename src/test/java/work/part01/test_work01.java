@@ -22,7 +22,7 @@ public class test_work01 {
     void test001() {
         Configuration.browser = "firefox";
         Configuration.browserSize = "800x400";
-        configuration.
+
 
         open("http://92.51.36.108:7777/sl.qa");
         sleep(10000);
