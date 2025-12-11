@@ -105,8 +105,9 @@ public class SimpleFormTest {
         open("https://slqamsk.github.io/tmp/xPath01.html");
         //Найти параграф с атрибутом class = special-paragraph
         $x("//a[@class='external-link'][1]").shouldHave(exactText("Внешняя ссылка (Example)"));
-        $x("//a[@class='external-link'][3]").shouldHave(exactText("Внешняя ссылка (Google)"));
+        $x("//a[@class='external-link'][2]").shouldHave(exactText("Внешняя ссылка (Google)"));
+        $x("//a[@class='internal-link'][1]").shouldHave(exactText("Внутренняя ссылка (О нас)"));
         sleep(2000);
-        System.out.println("Сообщение -  Внешние ссылки");
+        System.out.println("Сообщение -  Внешние и внутренние ссылки ссылки");
     }
 }
