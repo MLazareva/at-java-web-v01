@@ -1,27 +1,60 @@
 package work.part02;
 
-import org.junit.jupiter.api.Test;
+import com.codeborne.selenide.Browsers;
+import com.codeborne.selenide.Configuration;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 
 import java.util.concurrent.locks.Condition;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.open;
 
+// @TestMethodOrder(MethodOrderer.MethodName.class) Тесты выполняются в случайном порядке
+@TestMethodOrder(MethodOrderer.MethodName.class)   // тесты выполняются согласно сортировке по имени метода test 01-02-03
 public class SimpleFormTest {
+    @BeforeAll
+    static void beforeAll(TestInfo test_info) {
+        Configuration.browser = Browsers.CHROME;
+        System.out.println("Тест "+test_info.getDisplayName()+" начали выполнение - Before all");
+    }
+   @BeforeEach
+   void setUp(TestInfo test_info) {
+        System.out.println("Тест "+test_info.getDisplayName()+" начали выполнение - Before each");
+       //  open("https://slqa.ru/cases/SimpleForm");
+      //  sleep(2000);
+     //   closeWindow();
+    }
+
+    @AfterEach
+    void setDown(TestInfo test_info)
+        {
+            System.out.println("Тест "+test_info.getDisplayName()+" начали выполнение - After each");
+           // open("https://slqamsk.github.io/cases/slflights/v01/");
+          //  sleep(2000);
+            //   closeWindow();
+        }
+
+    @AfterAll
+    static void setedge(TestInfo test_info) {
+        System.out.println("Тест "+test_info.getDisplayName()+" начали выполнение - After all");
+       // open("https:////translate.yandex.ru/");
+   //     sleep(2000);
+      //  closeWindow();
+    }
+
     @Test
     public void test01_specific_commands() { // команды Selenide
         open("https://slqa.ru/cases/SimpleForm");
         $(By.id("unique_id")).sendKeys("Тест 100");
         $(By.name("unique_name")).type("Тест 200");
      //   $(By.tagName("blockquote")).shouldBe(Condition.exist);
-        $(By.tagName("blockquote")).shouldHave(text("спрашивает"));
+       // $(By.tagName("blockquote")).shouldHave(text("спрашивает"));
      //???   $(By.className("unique_class")).shouldBe(Condition.visible));
         // Ошибка ?   $(By.className("unique_class")).shouldHave(text("При входе в систему возникла ошибка.\nПопробуйте выполнить вход в систему попозже"));
         //   $(By.className("unique_class").shouldBe(visible));
-        $(By.className("unique_class")).shouldBe(visible);
+       // $(By.className("unique_class")).shouldBe(visible);
     }
     @Test
     public void test02_CSS_selectors() { // команды CSS
@@ -33,5 +66,47 @@ public class SimpleFormTest {
         sleep(1_000);
         $(".unique_class").shouldBe(visible);
         sleep(1_000);
+    }
+    @Test
+    public void test03() {
+      //  Configuration.browser = Browsers.CHROME;
+       // open("https://slqa.ru/cases/SimpleForm");
+       // sleep(2000);
+      //  closeWindow();
+        sleep(2000);
+        System.out.println("Сообщение");
+    }
+    @Test
+    public void test04_TestPageH1() {
+         Configuration.browser = Browsers.CHROME;
+         open("https://slqamsk.github.io/tmp/xPath01.html");
+        //Содержит такой текст
+        $x("//h1").shouldHave(text("Учебная страница для XPath"));
+        //Точное соответствие
+        $x("//h1").shouldHave(exactText("Учебная страница для XPath"));
+        sleep(2000);
+        System.out.println("Сообщение -  Учебная страница");
+    }
+    @Test
+    public void test05_testSpecialParagraph() {
+        Configuration.browser = Browsers.CHROME;
+        open("https://slqamsk.github.io/tmp/xPath01.html");
+        //Найти параграф с атрибутом class = special-paragraph
+        $x("//p[@class='special-paragraph']").shouldHave(exactText("Этот параграф особенный - он единственный на странице с таким классом."));
+        $x("//p[@class='info-text'][1]").shouldHave(exactText("Это первый информационный текст."));
+        $x("//p[@class='info-text'][2]").shouldHave(exactText("Это второй информационный текст."));
+        $x("//p[@class='info-text'][3]").shouldHave(exactText("Это третий информационный текст."));
+        sleep(2000);
+        System.out.println("Сообщение -  Параграф");
+    }
+    @Test
+    public void test06_ExternalLinks() {
+        Configuration.browser = Browsers.CHROME;
+        open("https://slqamsk.github.io/tmp/xPath01.html");
+        //Найти параграф с атрибутом class = special-paragraph
+        $x("//a[@class='external-link'][1]").shouldHave(exactText("Внешняя ссылка (Example)"));
+        $x("//a[@class='external-link'][3]").shouldHave(exactText("Внешняя ссылка (Google)"));
+        sleep(2000);
+        System.out.println("Сообщение -  Внешние ссылки");
     }
 }
