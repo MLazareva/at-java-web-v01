@@ -95,41 +95,52 @@ public class SimpleFormTest {
         $x("//*[@class = 'unique_class']").shouldHave(text("При входе в систему"));
         System.out.println("point6");
 
-        // ???? Почему не работает ???   $x("//*[starts-with(.,'Россия')])]").shouldHave(text("площадь 17 234 031"));
-        //  System.out.println("point7");
 
-        //    $x("//*[@class='unique_class')]").shouldHave(text("ошибка"));
-        // // ???? Почему не работает ???  $x("//*[starts-with(.,'При')]").shouldHave(text("ошибка"));
-        //   System.out.println("point9");
 
-        //  $x("//*[starts-with(.,'Казахстан')]").shouldHave(text("площадь 2 724 902"));
-        // System.out.println("point8");
+        // ???? $x("//*[@class='unique_class']").shouldHave(text("ошибка"));
+        //  ???    $x("//*[starts-with(.,'\"При')]").shouldHave(text("ошибка"));
+       // ??? $x("//*[starts-with(.,'Показатели')][3]").shouldHave(text("Воронеж"));
+        ///  System.out.println("point7");
 
-        //   $x("//*[starts-with(.,'Россия']").shouldHave(text("площадь 17 234 031"));
-        //   System.out.println("point8");
+          $x("//*[starts-with(.,'Казахстан')]").shouldHave(text("площадь 2 724 902"));
+         System.out.println("point8");
+
+          $x("//*[starts-with(.,'Россия')]").shouldHave(text("площадь 17 234 031"));
+           System.out.println("point9");
 
         //Дз стр 45
 
-        $(withText("Москва")).shouldHave(text("250 единиц"));   //Selenide
-        System.out.println("point9");
-        $(byText("Показатели по региону Москва: 250 единиц.")).shouldHave(text("250 единиц"));
-        System.out.println("point10");
+          $(withText("Москва")).shouldHave(text("250 единиц"));   //Selenide
+          System.out.println("point10");
+          $(byText("Показатели по региону Москва: 250 единиц.")).shouldHave(text("250 единиц"));
+          System.out.println("point11");
 
         // XPath
 
-    //    $x("//*[text()='Показатели по региону Москва: 250 единиц.']").shouldHave(text("250 единиц"));
-     //   System.out.println("point11");
-      //  $x("//*[contains(text(),'Москва']").shouldHave(text("250 единиц"));
-      //  System.out.println("point12");
+        //????   $x("//*[text()='Показатели по региону Москва: 250 единиц.']").should(exist);
 
-        $x("//*[.='Показатели по региону Москва: 250 единиц.']").shouldHave(text("250 единиц"));
+    //???("//*[text()='Показатели по региону Москва: 250 единиц.']).shouldHave(text("250 единиц."));
+
+       // System.out.println("point12");
+        $x("//*[contains(text(),'Показатели по региону Москва: 250 единиц.')]").shouldHave(text("250 единиц"));
         System.out.println("point13");
-        $x("//*[contains(.,'Москва']").shouldHave(text("250 единиц"));
-        System.out.println("point14");
+
+      //?????  $x("//*[.='Показатели по региону Москва: 250 единиц.']").shouldHave(text("Показатели по региону Москва: 250 единиц."));
+     //????  System.out.println("point14");
+
+        $x("//*[contains(.,'Москва')]").shouldHave(text("250 единиц"));
+        System.out.println("point15");
 
 
          $x("//*[starts-with(.,'Казахстан')]").shouldHave(text("площадь 2 724 902"));
-         System.out.println("point8");
+         System.out.println("point16");
+         $x("//*[starts-with(text(),'Казахстан')]").shouldHave(text("площадь 2 724 902"));
+         System.out.println("point17");
+
+        $x("//*[starts-with(.,'Россия')]").shouldHave(text("площадь 17 234 031"));
+        System.out.println("point18");
+        $x("//*[starts-with(text(),'Россия')]").shouldHave(text("площадь 17 234 031"));
+        System.out.println("point19");
 
     }
 
