@@ -126,6 +126,7 @@ public class SimpleFormTest {
         System.out.println("point13");
 
       //?????  $x("//*[.='Показатели по региону Москва: 250 единиц.']").shouldHave(text("Показатели по региону Москва: 250 единиц."));
+        //"//div[contain s(.,'Питер') and @class='not_unique_class']"
      //????  System.out.println("point14");
 
         $x("//*[contains(.,'Москва')]").shouldHave(text("250 единиц"));
