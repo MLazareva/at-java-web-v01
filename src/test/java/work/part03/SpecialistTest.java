@@ -47,7 +47,7 @@ public class SpecialistTest {
         $x("//button[@type='submit']").click();
 
        String myxPath = "//*[contains(text(),'Автоматизированное тестирование веб-приложений с" +
-               " использованием Selenium')]/ancestor::article//dd[contains(@class,'date-start')]";
+              " использованием Selenium')]/ancestor::article//dd[contains(@class,'date-start')]";
 
        // Этот вариант хуже (без contains) потому что в дальнейшем может добавиться другой класс в dd и тогда
        // проверка не сработает, а contain проверяет наличие 1 необходимого класса
