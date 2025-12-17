@@ -4,6 +4,10 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
@@ -14,12 +18,13 @@ public class NewIFramesTest {
         Configuration.pageLoadStrategy = "eager"; // Жадная загрузка
 
         open("https://practice-automation.com/iframes/"); // Страница с двумя iFrame
+        sleep(3_000);
+
         getWebDriver().manage().window().maximize();// Открываем страницу на весь экран
 
         //scrollTo() - проскролить до элемента, чтобы весь iFrame был видет на экране
         // скролим до нижнего элемента на экране, который идет следом за iFrame
         $x("//*[@class='wp-block-spacer'][2]").scrollTo(); //для демонстрации
-
         sleep(5_000);
 
         //Переключаемся на второй iFrame
@@ -39,5 +44,7 @@ public class NewIFramesTest {
         sleep(5_000);
         $x("//a[text()='Home']").click();//Кликаем по ссылке Home
         sleep(10_000);
+
+
     }
 }
