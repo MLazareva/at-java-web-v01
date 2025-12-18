@@ -5,7 +5,7 @@ import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.open;
 
 public class NewModal {
@@ -27,15 +27,15 @@ public class NewModal {
 
 
         String str1 = "//div[@id='pum-1318']/div[@id = 'popmake-1318']/button[@aria-label='Close']";
-        $x(str1).shouldBe(visible)    // проверяем что окно
-                .shouldBe(clickable)  //кнопка крестик кликабельна
+        $x(str1).shouldBe(visible)      // кнопка видима
+                .shouldBe(clickable)   //кнопка крестик кликабельна
                 .click();             // Нажимаем на крестик - закрывает модальное окно
 
         System.out.println("Модальное окно закрываем");
 
-        Selenide.sleep(5_000);
+        sleep(5_000);
         $x("//a[text()='Home']").click();
-        Selenide.sleep(5_000);
+        sleep(5_000);
         System.out.println("Переходим на начало страницы");
     }
 }
