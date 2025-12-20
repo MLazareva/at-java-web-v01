@@ -57,7 +57,6 @@ public class HWSpecialistTest {
         System.out.println("Нажали применить 7 ");
 
         // Проверить, что на странице есть "Тестирование ПО"
-       // $x(" //a[@class='course-link' and contains(.,'Тестирование ПО')]").shouldHave(text("Тестирование ПО"));
         $x("//a[@class='course-link' and @href='/course/tpo']").shouldHave(text("Тестирование ПО"));
         sleep(10_000);
 
