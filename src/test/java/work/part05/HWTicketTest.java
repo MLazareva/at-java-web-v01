@@ -46,36 +46,8 @@ public class HWTicketTest {
         System.out.println(str1);
 
         $x(str1).click();
-       sleep(2_000);
-       System.out.println("Выбрали время");
-
-    /*  String str2 = "";  // ????? Почему подчеркивает str2
-
-        if (Objects.equals(film1, "1")) {
-                      str2 ="//input[@type='radio' and @name='film' and @value=\"back\"]";
-            System.out.println(str2);
-        }
-        if (Objects.equals(film1, "2")) {
-             str2 ="//input[@type='radio' and @name='film' and @value=\"crime\"]";
-            System.out.println(str2);
-        }
-
-        if (Objects.equals(film1, "3")) {
-             str2 ="//input[@type='radio' and @name='film' and @value=\"king\"]";
-            System.out.println(str2);
-        }
-        if (Objects.equals(film1, "4")) {
-             str2 ="//input[@type='radio' and @name='film' and @value=\"killers\"]";
-            System.out.println(str2);
-        }
-
-        if (Objects.equals(film1, "5")) {
-             str2 ="//input[@type='radio' and @name='film' and @value=\"tango\"]";
-            System.out.println(str2);
-        }
-
-        $x(str2).click();
-*/
+        sleep(2_000);
+        System.out.println("Выбрали время");
 
         String str3 = "//input[@type='radio' and @name='film']"+"["+film1+"]";
         System.out.println(str3);
@@ -88,7 +60,6 @@ public class HWTicketTest {
 
         $x("//input[@value='Рассчитать']").shouldBe(visible)
                         .click();
-
 
       //  $x("//input[@type='submit' and @value='Рассчитать']").shouldBe(exist,Duration.ofSeconds(10));
      //   $x("//input[@type='submit' and @value='Рассчитать']").click();
@@ -105,9 +76,7 @@ public class HWTicketTest {
         System.out.println(se1.getTagName());
         System.out.println(se1.text());
 
-        // Убедимся, что это h3 (имя тега), еще имя и класс
-      //  System.out.println("Элемент с названием пиццы. Тег:" + se1.getTagName() + ", текст: "+ se1.text());
-
+        //Проверяем , что написана цена или почему запрет на покупку
        // $x("//div[contains(.,'Стоимость билета')]").shouldBe(exist, Duration.ofSeconds(10));
 
         sleep(2_000);
