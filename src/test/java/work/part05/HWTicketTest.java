@@ -46,8 +46,8 @@ public class HWTicketTest {
         $x(str1).click();
        sleep(2_000);
        System.out.println("Выбрали время");
-/*
-      String str2 = "";  ????? Почему подчеркивает str2
+
+    /*  String str2 = "";  // ????? Почему подчеркивает str2
 
         if (Objects.equals(film1, "1")) {
                       str2 ="//input[@type='radio' and @name='film' and @value=\"back\"]";
@@ -84,7 +84,9 @@ public class HWTicketTest {
 
 ///  Не работает нажатие на кнопку Рассчитать
 
-        $x("//input[@value='Рассчитать']").click();
+        $x("//input[@value='Рассчитать']").shouldBe(visible)
+                        .click();
+
 
       //  $x("//input[@type='submit' and @value='Рассчитать']").shouldBe(exist,Duration.ofSeconds(10));
      //   $x("//input[@type='submit' and @value='Рассчитать']").click();
