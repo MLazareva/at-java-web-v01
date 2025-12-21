@@ -22,6 +22,8 @@ public class HWTicketTest {
        Configuration.pageLoadTimeout= 30_000; // Чтобы успел открыть страницу
        Configuration.pageLoadStrategy = "eager";  // Жадная загрузка - мы не дожидаемся подгрузки всех ресурсов
        // Идем дальше, как только загрузился html
+       Configuration.browser ="chrome";
+
    }
    // Дата: {1} Время: {2} Фильм: {3} Результат: {4}
     @ParameterizedTest(name = "Тест №  #{index} Возраст: {0} Дата: {1} Время: {2} Фильм: {3} Результат: {4}")

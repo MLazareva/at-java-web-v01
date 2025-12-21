@@ -2,7 +2,7 @@ package work.part05;
 
 import org.junit.jupiter.api.Test;
 
-public class User {
+/*public class User {
     private String UserName;
     private String Password;
     private boolean IsBlocked;
@@ -53,3 +53,4 @@ public static void main(){
     System.out.println(name1);
 
 }
+*/
