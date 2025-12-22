@@ -17,7 +17,8 @@ public class HWTicketTest {
    // Для формы расчёта стоимости билета в кино: http://92.51.36.108:7777/sl.qa/cinema/index.php
     // напишите минимум 5 тест-кейсов и автоматизируйте их любым доступным вам способом.
     // Требования к форме см. на этом слайде:
-    // https://docs.google.com/presentation/d/1QwFokl3ghAUMXWeiCRO5oILF4Hcznrq60-pyP13Xfxw/edit?slide=id.g34b94a5208e_0_0#slide=id.g34b94a5208e_0_0
+    // https://docs.google.com/presentation/d/1QwFokl3ghAUMXWeiCRO5oILF4Hcz
+   // nrq60-pyP13Xfxw/edit?slide=id.g34b94a5208e_0_0#slide=id.g34b94a5208e_0_0
    static void beforeAll() {
        Configuration.pageLoadTimeout= 30_000; // Чтобы успел открыть страницу
        Configuration.pageLoadStrategy = "eager";  // Жадная загрузка - мы не дожидаемся подгрузки всех ресурсов
@@ -34,7 +35,6 @@ public class HWTicketTest {
 
        $x("//input[@name='age']").sendKeys(age);
 
-
        $x("//input[@name='date']").sendKeys(date);
 
       // $x("//input[@name='date']").click();
@@ -43,30 +43,24 @@ public class HWTicketTest {
 
        $x(str1).click();
 
-
        String str3 = "//input[@type='radio' and @name='film']"+"["+film1+"]";
 
        $x(str3).click();
-
 
        $x("//input[@value='Рассчитать']").click();
 
 //  $x("//input[@type='submit' and @value='Рассчитать']").shouldBe(exist,Duration.ofSeconds(10));
         //   $x("//input[@type='submit' and @value='Рассчитать']").click();
 
-
        String s1 = "//div[contains(text(),'"+ (rezult1.trim())+"')]";
        System.out.println(s1);
 
-        SelenideElement se1 =$x("//div");
-        System.out.println(se1.getTagName());
+       SelenideElement se1 =$x("//div");
+       System.out.println(se1.getTagName());
         System.out.println(se1.text());
 
        $x(s1).shouldBe(visible);
 
        sleep(2000);
-
-      // sleep(5_000);
-
     }
 }
