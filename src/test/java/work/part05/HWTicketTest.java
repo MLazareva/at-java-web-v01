@@ -29,57 +29,44 @@ public class HWTicketTest {
     @ParameterizedTest(name = "Тест №  #{index} Возраст: {0} Дата: {1} Время: {2} Фильм: {3} Результат: {4}")
     @CsvFileSource(resources = "ticket_data.csv", numLinesToSkip = 1)
     void test02_ticket_HW(String age, String date, String time1,  String film1, String rezult1) {
+
        open("http://92.51.36.108:7777/sl.qa/cinema/index.php");
-       sleep(2_000);
 
        $x("//input[@name='age']").sendKeys(age);
-       sleep(2_000);
-       System.out.println("Задали возраст");
+
 
        $x("//input[@name='date']").sendKeys(date);
-       sleep(2_000);
-       System.out.println("Задали дату");
+
+      // $x("//input[@name='date']").click();
 
        String str1 ="//input[@type='radio' and @name='session' and @value="+time1+"]";
-       // "//input[@type='radio' and @name='session' and @value= time1]"
 
-        System.out.println(str1);
+       $x(str1).click();
 
-        $x(str1).click();
-        sleep(2_000);
-        System.out.println("Выбрали время");
 
-        String str3 = "//input[@type='radio' and @name='film']"+"["+film1+"]";
-        System.out.println(str3);
+       String str3 = "//input[@type='radio' and @name='film']"+"["+film1+"]";
 
-        $x(str3).click();
-        sleep(2_000);
-        System.out.println("Выбрали фильм");
+       $x(str3).click();
 
-///  Не работает нажатие на кнопку Рассчитать
 
-        $x("//input[@value='Рассчитать']").shouldBe(visible)
-                        .click();
+       $x("//input[@value='Рассчитать']").click();
 
-      //  $x("//input[@type='submit' and @value='Рассчитать']").shouldBe(exist,Duration.ofSeconds(10));
-     //   $x("//input[@type='submit' and @value='Рассчитать']").click();
+//  $x("//input[@type='submit' and @value='Рассчитать']").shouldBe(exist,Duration.ofSeconds(10));
+        //   $x("//input[@type='submit' and @value='Рассчитать']").click();
 
-        sleep(2_000);
-        System.out.println("Нажали кнопку Рассчитать");
 
-        //String s1 = "//div[contains.,'"+ rezult1+"']";
-
-        System.out.println(rezult1);
-       // String s1 = "//div"
+       String s1 = "//div[contains(text(),'"+ (rezult1.trim())+"')]";
+       System.out.println(s1);
 
         SelenideElement se1 =$x("//div");
         System.out.println(se1.getTagName());
         System.out.println(se1.text());
 
-        //Проверяем , что написана цена или почему запрет на покупку
-       // $x("//div[contains(.,'Стоимость билета')]").shouldBe(exist, Duration.ofSeconds(10));
+       $x(s1).shouldBe(visible);
 
-        sleep(2_000);
-       // System.out.println(rezult1);
+       sleep(2000);
+
+      // sleep(5_000);
+
     }
 }
