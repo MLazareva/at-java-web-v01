@@ -38,10 +38,13 @@ public class routWindowTest {  //Страница - выбор маршрута
                     "//button[@class='s__CLVko2td9BsgMkhH' and @data-test-id='increase-button']"),
             buttonInfantMinus = $x("//div[@data-test-id='number-of-infants']" +
                     "//button[@class='s__CLVko2td9BsgMkhH' and @data-test-id='decrease-button']"),
-            buttonEconom = $x("//input[@data-test-id='trip-class-Y']"),
-            buttonComfort = $x("//input[@data-test-id='trip-class-W']"),
-            buttonBusiness = $x("//input[@data-test-id='trip-class-C']"),
-            buttonFirst    = $x("//input[@data-test-id='trip-class-F']");
+
+            buttonEconom   = $x("//label[@data-test-id='radio-button'][1]"),
+            buttonComfort  = $x("//label[@data-test-id='radio-button'][2]"),
+            buttonBusiness = $x("//label[@data-test-id='radio-button'][3]"),
+            buttonFirst    = $x("//label[@data-test-id='radio-button'][4]"),
+            findButton     = $x("//button[@data-test-id='form-submit']");
+
 
 
 
@@ -101,14 +104,37 @@ public class routWindowTest {  //Страница - выбор маршрута
         this.numberOfPassengers.click();     // Количество пассажиров
         sleep(2_000);
 
+        this.buttonAdultPlus.click(); // Увиличиваем число взрослых   2
         this.buttonAdultPlus.click(); // Увиличиваем число взрослых
         this.buttonAdultPlus.click(); // Увиличиваем число взрослых
-        this.buttonAdultPlus.click(); // Увиличиваем число взрослых
-        this.buttonAdultPlus.click(); // Увиличиваем число взрослых
-        this.buttonAdultMinus.click(); // Уменьшаем число взрослых
+        sleep(2_000);
         this.buttonAdultMinus.click(); // Уменьшаем число взрослых
         this.buttonAdultMinus.click(); // Уменьшаем число взрослых
         sleep(2_000);
+        this.buttonChildPlus.click();   //Увеличиваем число детей   1
+        this.buttonChildPlus.click();   //Увеличиваем число детей
+        this.buttonChildPlus.click();   //Увеличиваем число детей
+        this.buttonChildMinus.click();  // Уменьшаем число детей
+        this.buttonChildMinus.click();  // Уменьшаем число детей
+        sleep(2_000);
+        this.buttonInfantPlus.click();  //Увеличиваем число младенцев  1
+        this.buttonInfantPlus.click();  //Увеличиваем число младенцев
+        this.buttonInfantMinus.click(); //Уменьшаем  число младенцев
+
+
+        this.buttonComfort.click();   //Радио-кнопка
+        sleep(2_000);
+        this.buttonBusiness.click();  //Радио-кнопка
+        sleep(2_000);
+        this.buttonFirst.click();     //Радио-кнопка
+        sleep(2_000);
+        this.buttonEconom.click();    //Радио-кнопка
+        sleep(2_000);
+
+
+
+
+
 
         System.out.println("Дата вылета  ->"+ dataStr1);
         System.out.println("Дата прилета ->"+ dataStr2);
@@ -117,7 +143,8 @@ public class routWindowTest {  //Страница - выбор маршрута
 
 
 
-        // this.findButton.click();
+         this.findButton.click();
+         sleep(3_000);
     } //Test
 
 } //class

@@ -32,7 +32,7 @@ public class HWaviasalesTests {
         // Основаня страница поиска рейсов
 
         routWindowTest page1 = new routWindowTest();
-        page1.searchFlight("Москва","Екатеринбург","08.01.2026", "09.01.2026");
+        page1.searchFlight("Москва","Екатеринбург","08.01.2026", "16.01.2026");
         sleep(3_000);
 
 
