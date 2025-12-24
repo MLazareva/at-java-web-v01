@@ -2,14 +2,14 @@ package work.part06;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import demo.part07.pages.SearchPage;
+import demo.part07.pages.FlightsListPage;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
-import work.part06.sheets.routWindowTest;
+import work.part06.sheets.ListOfFlights;
+import work.part06.sheets.RoutWindowTest;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
@@ -29,14 +29,24 @@ public class HWaviasalesTests {
 
     @Test
     void test01_PageMainTest() {
+
         // Основаня страница поиска рейсов
+        RoutWindowTest page1 = new RoutWindowTest();
+        // Число пассажиров - не более 9 в сумме
+        page1.searchFlight("Москва","Екатеринбург","08.01.2026",
+                "09.01.2026", 1,1,0,1);
 
-        routWindowTest page1 = new routWindowTest();
-        page1.searchFlight("Москва","Екатеринбург","08.01.2026", "16.01.2026");
-        sleep(3_000);
+        sleep(30_000);
 
 
-        //Выберем Шереметьево
+        // Страница со списком найденных рейсов
+        //ListOfFlights flightsList = new ListOfFlights();
+         // flightsList.selectStraightFlights();   // Выбираем прямые рейсы
+
+       // sleep(30_000);
+       // flightsList.selectWithluggage();       // Выбираем рейсы с багажом
+      //  flightsList.closeWindowSettings();     //Закрываем настройки
+
 
 
 
