@@ -19,8 +19,7 @@ public class HWSelectFlightTest {
         Configuration.pageLoadTimeout = 30_000; // Чтобы успел открыть страницу
         Configuration.pageLoadStrategy = "eager";  // Жадная загрузка - мы не дожидаемся подгрузки всех ресурсов
         Configuration.browser = "chrome";  // устанваливаем браузер по умолчанию chrome
-       // open("https://travel.agileway.net/");
-      //  getWebDriver().manage().window().maximize();  // Окно на максимум
+
     }
     @BeforeEach
     void beforeEach() {
@@ -28,27 +27,67 @@ public class HWSelectFlightTest {
         getWebDriver().manage().window().maximize();  // Окно на максимум
     }
 
-    @Test
-    @Order(1)
-    void test_01() {
-        InputLogin inputLogin = new InputLogin();
-        inputLogin.loginFunc("agileway", "test$W1se");
 
-
-        SelectFlight selFl = new SelectFlight();
-        selFl.setFlight("1", "New York", "Sydney", "02.01.2026", "03.01.2025");
-
-
-    }
 
     @Test
     @Order(2)
-    void test_02() {
-        InputLogin inputLogin = new InputLogin();
+    @Disabled
+    void test_02() {  //Позитивный с 3 параметрами в логине
+        InputLogin inputLogin = new InputLogin();  // Логинимся с Remember
         inputLogin.loginFunc("agileway", "test$W1se", "1");  // с Remember
+        inputLogin.LoginSuccessful();
+    }
+    @Test
+    @Order(3)
+    @Disabled
+    void test_03() {   // Неверный пароль при входе
+        InputLogin inputLogin = new InputLogin();
+        inputLogin.loginFunc("agileway", "dontremember");
+        inputLogin.LoginUnsuccessful();
+    }
+    @Test
+    @Order(4)
+    @Disabled
+    void test_04() {   // Неверный логин при входе
+        InputLogin inputLogin = new InputLogin();
+        inputLogin.loginFunc("nocorrect", "test$W1se");
+        inputLogin.LoginUnsuccessful();
+    }
+    @Test
+    @Order(5)
+    @Disabled
+    void test_05() {   // Не заданы логин и пароль при входе
+        InputLogin inputLogin = new InputLogin();
+        inputLogin.loginFunc("", "");
+        inputLogin.LoginUnsuccessful();
+    }
+    @Test
+    @Order(6)
+     @Disabled
+    void test_06() {   // Успешная регистрация
+        InputLogin inputLogin = new InputLogin();
+        inputLogin.loginFunc("agileway", "test$W1se");
+        inputLogin.LoginSuccessful();
+    }
 
-        SelectFlight selFl = new SelectFlight();
-        selFl.setFlight("1", "New York", "Sydney", "02.01.2026", "03.01.2025");
+    @Test
+    @Order(7)
+    void test_01() {    //Позитивный тест
+        InputLogin inputLogin = new InputLogin();  //Логинимся без Remember
+        inputLogin.loginFunc("agileway", "test$W1se");
+        inputLogin.LoginSuccessful();
+
+        SelectFlight selFl = new SelectFlight();    //Выбираем рейсы
+        //New York - Sedney -  San Francisco
+        //New York - Sedney
+        selFl.setFlight("New York", "Sydney", "12.08.2026","1");
+         //  город вылета
+         //  город прилета
+         // дата вылета
+         // рейс - от 1-2-3
+
 
     }
+
+
 }
