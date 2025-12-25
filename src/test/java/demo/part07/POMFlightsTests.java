@@ -80,12 +80,17 @@ public class POMFlightsTests {
 
         // Страница со списком найденных рейсов
         FlightsListPage flightsList = new FlightsListPage();
+        sleep(3000);
         flightsList.registerToFirstFlight();
+        sleep(3000);
 
         // Страница регистрации на рейс
         RegistrationPage registrationPage = new RegistrationPage();
+        sleep(3000);
         registrationPage.isFlightDataCorrect("Москва", "Нью-Йорк");
+        sleep(3000);
         registrationPage.successRegistration();
+        sleep(3000);
     }
 
     // 5. Пустые поля

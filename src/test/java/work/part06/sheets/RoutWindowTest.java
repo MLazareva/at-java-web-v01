@@ -145,7 +145,8 @@ public class RoutWindowTest {  //Страница - выбор маршрута
         this.cityTo.sendKeys(to_param);*/
 
             this.findButton.click();  // Нажать кнопку Найти билеты
-        sleep(30000);
+         sleep(30000);
+
     } //Test
 
 } //class
