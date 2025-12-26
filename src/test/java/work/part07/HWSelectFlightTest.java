@@ -2,6 +2,7 @@ package work.part07;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.Step;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.Alert;
@@ -90,7 +91,7 @@ public class HWSelectFlightTest {
             // дата вылета
             // рейс - от 1-2-3
         } catch (AssertionError error){
-            System.err.println("Сообщение #1 об ошибке для Марины: "+error.getMessage());
+            System.err.println("Сообщение #1 об ошибке: "+error.getMessage());
         }
 
         PassengerDetails passengerData = new PassengerDetails();
@@ -98,7 +99,7 @@ public class HWSelectFlightTest {
         try {                                        //Оборачивает в try для удобства проверки ассертов
             passengerData.checkData("New York","Sydney","02.08.2026","1");
         } catch (AssertionError error){
-            System.err.println("Сообщение #2 об ошибке для Марины: "+error.getMessage());
+            System.err.println("Сообщение #2 об ошибке: "+error.getMessage());
         }
 
         // Заполяем имя и фамилию
@@ -109,16 +110,26 @@ public class HWSelectFlightTest {
         try {
             cardinfo.checkCard("New York","Sydney","1");
         } catch (AssertionError error){
-            System.err.println("Сообщение #3 об ошибке для Марины: "+error.getMessage());
+            System.err.println("Сообщение #3 об ошибке: "+error.getMessage());
         }
 
-
-        cardinfo.enterDataCard("1","Ivan","Ivanov");  // Заполняем данные карточки
-
-
-        sleep(3000);
+        //Заполняем данные карточки
+        cardinfo.enterDataCard("1", "987654321","05","2025");  // Заполняем данные карточки
 
 
+        try {
+            cardinfo.getConfirmation();     //Подтверждение наличия регистрации на рейс
+        } catch (AssertionError error){
+            System.err.println("Сообщение #4 об ошибке: "+error.getMessage());
+        }
+
+       try {   //Проверяем что все данные в Confirmation верны
+            cardinfo.checkConfirmData("New York", "Sydney", "02.08.2026", "1", "Ivan","Ivanov");
+            sleep(3000);
+
+        }catch (AssertionError error){
+            System.err.println("Сообщение #5 об ошибке: "+error.getMessage());
+        }
     }
 
 
@@ -151,7 +162,7 @@ public class HWSelectFlightTest {
             System.err.println("Сообщение #2 об ошибке для Марины: " + error.getMessage());
         }
 
-        // Заполяем имя и фамилию
+        // Заполняем имя и фамилию
         passengerData.enterName("Ivan", "");  //Не указали фамилию
         passengerData.emptyLastName();  //обрабатываем сообщение об ошибке - нет фамилии
         sleep(3000);

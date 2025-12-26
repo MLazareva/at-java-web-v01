@@ -19,7 +19,7 @@ public class PassengerDetails {
             error_message = $x("//div[@id='flash_alert']");
 
 
-    private String makeDateCorrect(String date) {
+    public static String makeDateCorrect(String date) {
         //Передаём дату в формате DD.MM.YYYY - выдаем в формате YYYY-MM-DD
         if (Configuration.browser == "chrome" && date != null && date.length() == 10) {
             return date.substring(6, 10) + "-" +

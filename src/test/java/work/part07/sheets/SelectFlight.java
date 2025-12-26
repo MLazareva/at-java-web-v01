@@ -31,7 +31,7 @@ public class SelectFlight {
                 .shouldHave(text("Time"));
     }
 
-    private String makeDateCorrect(String date) {
+    public String makeDateCorrect(String date) {
         //Передаём дату в формате DD.MM.YYYY - выдаем в формате YYYY-MM-DD
         if (Configuration.browser == "chrome" && date != null && date.length() == 10) {
             return date.substring(6, 10) + "-" +
