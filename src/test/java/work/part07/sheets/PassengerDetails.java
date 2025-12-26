@@ -33,13 +33,13 @@ public class PassengerDetails {
     public void checkData(String from_p, String to_p,  String date1_p, String flight_p) {
         switch (flight_p) {   //Проверяем тип поездки
             case "1" -> {
-
                 this.dataFlight.shouldHave(text("oneway trip"));   //Проверяем тип поездки
                 this.dataFlight.shouldHave(text(from_p));        // Проверяем город вылета
                 this.dataFlight.shouldHave(text(to_p));  // Проверяем город прибытия
 
                 String str1 = makeDateCorrect(date1_p);  // переводим 11.12.2025->2025-12-11
                 this.dataFlight.shouldHave(text(makeDateCorrect(date1_p)));
+                System.out.println("##5 Все данные верны на странице имя-фамилия");
 
             }
             case "2" -> {   // Сделать Марина
@@ -55,11 +55,13 @@ public class PassengerDetails {
             this.first_name.type(name1);
             this.last_Name.setValue(name2);  //setValue
             this.button_Next.click();
+            System.out.println("##6 Завели данные по пассажиру");
         }//enterName
 
     @Step("Сообщение о том, что необходимо заполнить фамилию ")
     public void emptyLastName() {
-        this.error_message.shouldHave(text("Must provide last name"));
+            this.error_message.shouldHave(text("Must provide last name"));
+            System.out.println("##7 Необходимо указать имя и фамилию");
     }
 
 

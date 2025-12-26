@@ -58,7 +58,7 @@ public class CardDetails {
 
         this.buttonPayNow.click();  // Нажимаем [Pay now]
 
-        sleep(3000);
+        System.out.println("Заполнили данные карточки");
 
 
     }//enterName
@@ -90,6 +90,9 @@ public class CardDetails {
 
                 this.passengerDetails.shouldHave(text(name1+" "+name2)); // Проверяем  имя и фамилию
                 System.out.println("ЕСТЬ имя ФАМИЛИЯ3333333"+name1+" "+name2);
+                System.out.println("Данные в Confirmation верны");
+
+
 
             }
             case "2" -> {   // Сделать Марина

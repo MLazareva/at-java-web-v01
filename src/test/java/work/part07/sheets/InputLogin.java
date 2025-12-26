@@ -24,6 +24,7 @@ public class InputLogin {
         this.userName.setValue(username);
         this.passWord.setValue(password);
         this.button_signIn.click();
+        System.out.println("## 1 ПРОШЛИ РЕГИСТРАЦИЮ без remember");
     }
 
     @Step("Регистрация в системе c remember")
@@ -32,17 +33,20 @@ public class InputLogin {
         this.passWord.setValue(password);
         this.checkBox.click();  // Нажимаем Remember me
         this.button_signIn.click();
+        System.out.println("## 8 ПРОШЛИ РЕГИСТРАЦИЮ c remember");
     }
 
-    @Step("Неуспешный логин или пароль")
+    @Step("Неверный логин или пароль")
     public void LoginUnsuccessful() {
         this.errorMessage.shouldBe(visible);
         this.errorMessage.shouldHave(text("Invalid email or password"));
+        System.out.println("## 9 НЕВЕРНЫЙ ЛОГИН ИЛИ ПАРОЛЬ");
     }
 
     @Step("Успешная регистрация")
     public void LoginSuccessful() {
         this.correctLogin.shouldHave(text("Signed in!"));
+        System.out.println("##2 УСПЕШНАЯ РЕГИСТРАЦИЯ");
     }
 
 }

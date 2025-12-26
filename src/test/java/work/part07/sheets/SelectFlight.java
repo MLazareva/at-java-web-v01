@@ -24,11 +24,12 @@ public class SelectFlight {
 
 
 
-    @Step("Проверка, что открыто окно с рейсам")
+    @Step("Проверка, что открыто окно с рейсами")
     void isFlightTable() {    // На форме появилось окно с рейсами
         this.tableFlights
                 .shouldBe(visible)
                 .shouldHave(text("Time"));
+        System.out.println("##3 Табло есть");
     }
 
     public String makeDateCorrect(String date) {
@@ -41,7 +42,7 @@ public class SelectFlight {
         return date;
     }
 
-    @Step("Задание данных рейса в одну сторону") //
+    @Step("Задание данных рейса") //
     public void setFlight(String from_p, String to_p, String date1_p, String flight_p) {  // В одну сторону
 
         this.typeOneWay.click();   // В одну сторону
@@ -59,21 +60,19 @@ if (date1_p!= null && date1_p.length() == 10) {
 
 
         switch(flight_p){
-            case "1" -> this.checkFlight1.click();
+            case "1" -> {
+                this.checkFlight1.click();
+                System.out.println("##4 ЗАДАЛИ ДАННЫЕ В ОДНУ СТОРОНУ");
+            }
             case "2" -> this.checkFlight2.click();
             case "3" -> this.checkFlight3.click();
             default -> this.checkFlight1.click();
         }
 
 
-        sleep(3_000);
-
         this.buttonContinue.click();    // Нажимаем Continue
 
-        sleep(3_000);
 
-
-        //   getWebDriver().close();
 
     }
 

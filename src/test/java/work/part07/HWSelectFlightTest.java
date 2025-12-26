@@ -12,6 +12,7 @@ import work.part07.sheets.PassengerDetails;
 import work.part07.sheets.SelectFlight;
 
 import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.WebDriverRunner.driver;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)    //Тесты выполняются по номеру order
@@ -30,51 +31,70 @@ public class HWSelectFlightTest {
         getWebDriver().manage().window().maximize();  // Окно на максимум
     }
 
+    @AfterEach
+    void afterEach() {
+      //  driver().close();
+        getWebDriver().close(); // Закрываем окно, освобождаем память
+        System.out.println("ЗАКРЫЛИ ОКНО");
+    }
+
+
+
 
 
     @Test
-    @Order(2)
-    @Disabled
-    void test_022() {  //Позитивный с 3 параметрами в логине
+    @Order(3)
+    @Step("Позитивный тест - логин с remember")
+    void test_03() {  //Позитивный с 3 параметрами в логине - с remember
         InputLogin inputLogin = new InputLogin();  // Логинимся с Remember
         inputLogin.loginFunc("agileway", "test$W1se", "1");  // с Remember
         inputLogin.LoginSuccessful();
+        System.out.println("******Прошли 3 тест");
     }
+
     @Test
-    @Order(3)
-    @Disabled
-    void test_023() {   // Неверный пароль при входе
+    @Order(4)
+    @Step("Негативный тест - без remember - Неверный пароль при входе")
+    void test_04() {   // Неверный пароль при входе
         InputLogin inputLogin = new InputLogin();
         inputLogin.loginFunc("agileway", "dontremember");
         inputLogin.LoginUnsuccessful();
+        System.out.println("******Прошли 4 тест");
     }
-    @Test
-    @Order(4)
-    @Disabled
-    void test_024() {   // Неверный логин при входе
-        InputLogin inputLogin = new InputLogin();
-        inputLogin.loginFunc("nocorrect", "test$W1se");
-        inputLogin.LoginUnsuccessful();
-    }
+
     @Test
     @Order(5)
-    @Disabled
-    void test_025() {   // Не заданы логин и пароль при входе
+    @Step ("Негативный тест - c remember - Неверный логин при входе")
+    void test_05() {   // Неверный логин при входе
+        InputLogin inputLogin = new InputLogin();
+        inputLogin.loginFunc("nocorrect", "test$W1se","1");
+        inputLogin.LoginUnsuccessful();
+        System.out.println("******Прошли 5 тест");
+    }
+
+    @Test
+    @Order(6)
+    @Step("Негативный тест - без remember - Не указываются ни логин, ни пароль")
+    void test_06() {   // Не заданы логин и пароль при входе
         InputLogin inputLogin = new InputLogin();
         inputLogin.loginFunc("", "");
         inputLogin.LoginUnsuccessful();
-    }
-    @Test
-    @Order(6)
-     @Disabled
-    void test_026() {   // Успешная регистрация
-        InputLogin inputLogin = new InputLogin();
-        inputLogin.loginFunc("agileway", "test$W1se");
-        inputLogin.LoginSuccessful();
+        System.out.println("******Прошли 6 тест");
     }
 
     @Test
     @Order(7)
+    @Step("Позитивный тест - логин без remember")
+    void test_07() {   // Успешная регистрация
+        InputLogin inputLogin = new InputLogin();
+        inputLogin.loginFunc("agileway", "test$W1se");
+        inputLogin.LoginSuccessful();
+        System.out.println("******Прошли 7 тест");
+    }
+
+    @Test
+    @Order(1)
+    @Step("Позитивный полный тест-Рейс в одну сторону- карта Visa")
     void test_01() {    //Позитивный тест
         InputLogin inputLogin = new InputLogin();  //Логинимся без Remember
         inputLogin.loginFunc("agileway", "test$W1se");
@@ -95,14 +115,14 @@ public class HWSelectFlightTest {
         }
 
         PassengerDetails passengerData = new PassengerDetails();
-        //Проверяем что все данные верно перешли на след.страницу(имя-фамилия)
+        //Проверяем что все данные верно перешли на следующую страницу(имя-фамилия)
         try {                                        //Оборачивает в try для удобства проверки ассертов
             passengerData.checkData("New York","Sydney","02.08.2026","1");
         } catch (AssertionError error){
             System.err.println("Сообщение #2 об ошибке: "+error.getMessage());
         }
 
-        // Заполяем имя и фамилию
+        // Заполняем имя и фамилию
         passengerData.enterName("Ivan","Ivanov");
 
         CardDetails cardinfo = new CardDetails();
@@ -130,11 +150,13 @@ public class HWSelectFlightTest {
         }catch (AssertionError error){
             System.err.println("Сообщение #5 об ошибке: "+error.getMessage());
         }
+       System.out.println("******Прошли 1 тест");
     }
 
 
     @Test
-    @Order(8)
+    @Order(2)
+    @Step("Негативный тест - без remeber- В одну сторону - Не указана фамилия )")
     void test_02() {    //Негативный тест - не указали фамилию
         InputLogin inputLogin = new InputLogin();  //Логинимся без Remember
         inputLogin.loginFunc("agileway", "test$W1se");
@@ -165,7 +187,8 @@ public class HWSelectFlightTest {
         // Заполняем имя и фамилию
         passengerData.enterName("Ivan", "");  //Не указали фамилию
         passengerData.emptyLastName();  //обрабатываем сообщение об ошибке - нет фамилии
-        sleep(3000);
+
+        System.out.println("******Прошли 2 тест");
     }//   test_02
 
 
