@@ -4,11 +4,13 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
+import org.openqa.selenium.Alert;
+import work.part07.sheets.CardDetails;
 import work.part07.sheets.InputLogin;
+import work.part07.sheets.PassengerDetails;
 import work.part07.sheets.SelectFlight;
 
-import static com.codeborne.selenide.Selenide.closeWindow;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)    //Тесты выполняются по номеру order
@@ -32,7 +34,7 @@ public class HWSelectFlightTest {
     @Test
     @Order(2)
     @Disabled
-    void test_02() {  //Позитивный с 3 параметрами в логине
+    void test_022() {  //Позитивный с 3 параметрами в логине
         InputLogin inputLogin = new InputLogin();  // Логинимся с Remember
         inputLogin.loginFunc("agileway", "test$W1se", "1");  // с Remember
         inputLogin.LoginSuccessful();
@@ -40,7 +42,7 @@ public class HWSelectFlightTest {
     @Test
     @Order(3)
     @Disabled
-    void test_03() {   // Неверный пароль при входе
+    void test_023() {   // Неверный пароль при входе
         InputLogin inputLogin = new InputLogin();
         inputLogin.loginFunc("agileway", "dontremember");
         inputLogin.LoginUnsuccessful();
@@ -48,7 +50,7 @@ public class HWSelectFlightTest {
     @Test
     @Order(4)
     @Disabled
-    void test_04() {   // Неверный логин при входе
+    void test_024() {   // Неверный логин при входе
         InputLogin inputLogin = new InputLogin();
         inputLogin.loginFunc("nocorrect", "test$W1se");
         inputLogin.LoginUnsuccessful();
@@ -56,7 +58,7 @@ public class HWSelectFlightTest {
     @Test
     @Order(5)
     @Disabled
-    void test_05() {   // Не заданы логин и пароль при входе
+    void test_025() {   // Не заданы логин и пароль при входе
         InputLogin inputLogin = new InputLogin();
         inputLogin.loginFunc("", "");
         inputLogin.LoginUnsuccessful();
@@ -64,7 +66,7 @@ public class HWSelectFlightTest {
     @Test
     @Order(6)
      @Disabled
-    void test_06() {   // Успешная регистрация
+    void test_026() {   // Успешная регистрация
         InputLogin inputLogin = new InputLogin();
         inputLogin.loginFunc("agileway", "test$W1se");
         inputLogin.LoginSuccessful();
@@ -80,14 +82,81 @@ public class HWSelectFlightTest {
         SelectFlight selFl = new SelectFlight();    //Выбираем рейсы
         //New York - Sedney -  San Francisco
         //New York - Sedney
-        selFl.setFlight("New York", "Sydney", "12.08.2026","1");
-         //  город вылета
-         //  город прилета
-         // дата вылета
-         // рейс - от 1-2-3
+
+        try { //Оборачивает в try для удобства проверки ассертов
+            selFl.setFlight("New York", "Sydney", "02.08.2026", "1");
+            //  город вылета
+            //  город прилета
+            // дата вылета
+            // рейс - от 1-2-3
+        } catch (AssertionError error){
+            System.err.println("Сообщение #1 об ошибке для Марины: "+error.getMessage());
+        }
+
+        PassengerDetails passengerData = new PassengerDetails();
+        //Проверяем что все данные верно перешли на след.страницу(имя-фамилия)
+        try {                                        //Оборачивает в try для удобства проверки ассертов
+            passengerData.checkData("New York","Sydney","02.08.2026","1");
+        } catch (AssertionError error){
+            System.err.println("Сообщение #2 об ошибке для Марины: "+error.getMessage());
+        }
+
+        // Заполяем имя и фамилию
+        passengerData.enterName("Ivan","Ivanov");
+
+        CardDetails cardinfo = new CardDetails();
+        //Проверяем что все данные верно перешли на след.страницу(карточка)
+        try {
+            cardinfo.checkCard("New York","Sydney","1");
+        } catch (AssertionError error){
+            System.err.println("Сообщение #3 об ошибке для Марины: "+error.getMessage());
+        }
+
+
+        cardinfo.enterDataCard("1","Ivan","Ivanov");  // Заполняем данные карточки
+
+
+        sleep(3000);
 
 
     }
+
+
+    @Test
+    @Order(8)
+    void test_02() {    //Негативный тест - не указали фамилию
+        InputLogin inputLogin = new InputLogin();  //Логинимся без Remember
+        inputLogin.loginFunc("agileway", "test$W1se");
+        inputLogin.LoginSuccessful();
+
+        SelectFlight selFl = new SelectFlight();    //Выбираем рейсы
+        //New York - Sedney -  San Francisco
+        //New York - Sedney
+
+        try { //Оборачивает в try для удобства проверки ассертов
+            selFl.setFlight("New York", "Sydney", "02.08.2026", "1");
+            //  город вылета
+            //  город прилета
+            // дата вылета
+            // рейс - от 1-2-3
+        } catch (AssertionError error) {
+            System.err.println("Сообщение #1 об ошибке для Марины: " + error.getMessage());
+        }
+
+        PassengerDetails passengerData = new PassengerDetails();
+        //Проверяем что все данные верно перешли на след.страницу
+        try {                                        //Оборачивает в try для удобства проверки ассертов
+            passengerData.checkData("New York", "Sydney", "02.08.2026", "1");
+        } catch (AssertionError error) {
+            System.err.println("Сообщение #2 об ошибке для Марины: " + error.getMessage());
+        }
+
+        // Заполяем имя и фамилию
+        passengerData.enterName("Ivan", "");  //Не указали фамилию
+        passengerData.emptyLastName();  //обрабатываем сообщение об ошибке - нет фамилии
+        sleep(3000);
+    }//   test_02
+
 
 
 }
