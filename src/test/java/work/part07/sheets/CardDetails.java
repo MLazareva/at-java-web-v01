@@ -68,7 +68,7 @@ public class CardDetails {
     @Step("Подтверждение наличия регистрации на рейс")
     public void getConfirmation() {
         this.getConfirm.shouldBe(visible);
-        System.out.println("ЕСТЬ РЕГИСТРАЦИЯ");
+        System.out.println("ЕСТЬ РЕГИСТРАЦИЯ 234");
     }
 
     @Step("Проверяем то, что данные (Туда) в Confirmation верны")
@@ -89,7 +89,7 @@ public class CardDetails {
                 System.out.println("ЕСТЬ ГОРОД ПРИБЫТИЯ");
 
                 this.passengerDetails.shouldHave(text(name1+" "+name2)); // Проверяем  имя и фамилию
-                System.out.println("ЕСТЬ имя ФАМИЛИЯ3333333"+name1+" "+name2);
+                System.out.println("ЕСТЬ имя и ФАМИЛИЯ "+name1+" "+name2);
                 System.out.println("Данные в Confirmation верны");
 
 
@@ -97,33 +97,33 @@ public class CardDetails {
 
 
 
-    @Step("Проверяем то, что данные (Туда) в Confirmation верны")
+    @Step("Проверяем то, что данные (Туда-Обратно) в Confirmation верны")
     public void checkConfirmData(String from_p, String to_p, String date1_p,String date2_p,
                                  String name1, String name2) {
 
                 this.booking_number.shouldBe(visible); //Проверяем что есть номер бронирования 'Booking number  ####'
-                System.out.println("ЕСТЬ НОМЕР РЕГИСТРАЦИИ");
+                System.out.println("ЕСТЬ НОМЕР РЕГИСТРАЦИИ 00000");
 
                 this.flights.shouldHave(text("return Trip"));   //Проверяем тип поездки
-                System.out.println("ЕСТЬ ТИП РЕЙСА 2");
+                System.out.println("ЕСТЬ ТИП РЕЙСА 2 00000001");
 
                 String str1 =  PassengerDetails.makeDateCorrect(date1_p); //Преобразуем дату
                 this.flights.shouldHave(text(str1.trim())); // Проверяем дату вылета
-                System.out.println("ЕСТЬ ДАТА РЕЙСА туда");
+                System.out.println("ЕСТЬ ДАТА РЕЙСА туда  00002");
 
                 String str2 =  PassengerDetails.makeDateCorrect(date2_p); //Преобразуем дату
                 this.flights.shouldHave(text(str1.trim())); // Проверяем дату вылета
-                System.out.println("ЕСТЬ ДАТА РЕЙСА обратно");
+                System.out.println("ЕСТЬ ДАТА РЕЙСА обратно  00003");
 
 
                 this.flights.shouldHave(text(from_p));     // Проверяем город вылета
-                System.out.println("ЕСТЬ ГОРОД ОТПРАВЛЕНИЯ");
+                System.out.println("ЕСТЬ ГОРОД ОТПРАВЛЕНИЯ   00004");
                 this.flights.shouldHave(text(to_p));      // Проверяем город прибытия
-                System.out.println("ЕСТЬ ГОРОД ПРИБЫТИЯ");
+                System.out.println("ЕСТЬ ГОРОД ПРИБЫТИЯ   0005");
 
                 this.passengerDetails.shouldHave(text(name1+" "+name2)); // Проверяем  имя и фамилию
                 System.out.println("ЕСТЬ имя ФАМИЛИЯ и имя "+name1+" "+name2);
-                System.out.println("Данные в Confirmation верны");
+                System.out.println("Данные в Confirmation верны   00006");
 
     }//checkConfirmData
 
