@@ -29,11 +29,10 @@ public class PassengerDetails {
         return date;
     }
 
-    @Step("Проверяем то, что данные верно перенесены на следующую страницу(имя-фамилия)")
-    public void checkData(String from_p, String to_p,  String date1_p, String flight_p) {
-        switch (flight_p) {   //Проверяем тип поездки
-            case "1" -> {
-                this.dataFlight.shouldHave(text("oneway trip"));   //Проверяем тип поездки
+    @Step("Проверяем то, что данные (туда) верно перенесены на следующую страницу(имя-фамилия)")
+    public void checkData(String from_p, String to_p,  String date1_p) {
+
+                this.dataFlight.shouldHave(text("oneway trip"));   //Туда (дата-параметр один)
                 this.dataFlight.shouldHave(text(from_p));        // Проверяем город вылета
                 this.dataFlight.shouldHave(text(to_p));  // Проверяем город прибытия
 
@@ -41,13 +40,6 @@ public class PassengerDetails {
                 this.dataFlight.shouldHave(text(makeDateCorrect(date1_p)));
                 System.out.println("##5 Все данные верны на странице имя-фамилия");
 
-            }
-            case "2" -> {   // Сделать Марина
-                System.out.println("both side");
-                this.dataFlight.shouldHave(text("return trip"));
-            }
-            default -> this.dataFlight.shouldHave(text("error with parameters"));
-        }
     }//checkData
 
         @Step("Заполнение полей - имя и фамилия")
@@ -64,7 +56,23 @@ public class PassengerDetails {
             System.out.println("##7 Необходимо указать имя и фамилию");
     }
 
+    @Step("Проверяем то, что данные (туда-обратно) верно перенесены на следующую страницу(имя-фамилия)")
+    public void checkData(String from_p, String to_p,  String date1_p, String date2_p) {
 
+                this.dataFlight.shouldHave(text("return trip"));   //Проверяем тип поездки
+                this.dataFlight.shouldHave(text(from_p));        // Проверяем город вылета
+                this.dataFlight.shouldHave(text(to_p));  // Проверяем город прибытия
+
+
+                String str1 = makeDateCorrect(date1_p);  // переводим 11.12.2025->2025-12-11
+                this.dataFlight.shouldHave(text(makeDateCorrect(date1_p)));
+                String str2 = makeDateCorrect(date2_p);  // переводим 11.12.2025->2025-12-11
+                this.dataFlight.shouldHave(text(makeDateCorrect(date2_p)));
+                System.out.println("##55 Все данные верны на странице имя-фамилия");
+
+
+
+    }//checkData
 
 
 

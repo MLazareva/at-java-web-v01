@@ -26,19 +26,21 @@ public class CardDetails {
 
 
 
-    @Step("Проверяем то, что данные верно перенесены на следующую страницу(данные карточки)")
-    public void checkCard(String from_p, String to_p, String flight_p) {
-        switch (flight_p) {   //Проверяем тип поездки
-            case "1" -> {
-                System.out.println("CARD!!!!!!"+ this.dataCard.text());
+    @Step("Проверяем то, что данные (Туда) верно перенесены на следующую страницу(данные карточки)")
+    public void checkCard(String from_p, String to_p, String type_p) {
+        switch (type_p) {   //Проверяем тип поездки
+            case "1" -> {    // Туда
+
                 this.dataCard.shouldHave(text("oneway"));   //Проверяем тип поездки
                 this.dataCard.shouldHave(text(from_p));        // Проверяем город вылета
                 this.dataCard.shouldHave(text(to_p));  // Проверяем город прибытия
 
             }
-            case "2" -> {   // Сделать Марина
-                System.out.println("both side");
-                this.dataCard.shouldHave(text("return trip"));
+            case "2" -> {   // Туда-обратно
+                System.out.println("return");
+                this.dataCard.shouldHave(text("return"));
+                this.dataCard.shouldHave(text(from_p));        // Проверяем город вылета
+                this.dataCard.shouldHave(text(to_p));  // Проверяем город прибытия
             }
             default -> this.dataCard.shouldHave(text("error with parameters"));
         }
@@ -69,14 +71,12 @@ public class CardDetails {
         System.out.println("ЕСТЬ РЕГИСТРАЦИЯ");
     }
 
-    @Step("Проверяем то, что данные в Confirmation верны")
-    public void checkConfirmData(String from_p, String to_p,  String date1_p, String flight_p, String name1, String name2) {
+    @Step("Проверяем то, что данные (Туда) в Confirmation верны")
+    public void checkConfirmData(String from_p, String to_p,  String date1_p,
+                                 String name1, String name2) {
 
-        this.booking_number.shouldBe(visible); //Проверяем что есть номер бронирования 'Booking number  ####'
-        System.out.println("ЕСТЬ НОМЕР РЕГИСТРАЦИИ");
-
-        switch (flight_p) {   //Проверяем тип поездки
-            case "1" -> {
+                this.booking_number.shouldBe(visible); //Проверяем что есть номер бронирования 'Booking number  ####'
+                System.out.println("ЕСТЬ НОМЕР РЕГИСТРАЦИИ");
 
                 this.flights.shouldHave(text("oneway Trip"));   //Проверяем тип поездки
                 System.out.println("ЕСТЬ ТИП РЕЙСА 1");
@@ -93,14 +93,39 @@ public class CardDetails {
                 System.out.println("Данные в Confirmation верны");
 
 
+    }//checkConfirmData
 
-            }
-            case "2" -> {   // Сделать Марина
-              //  System.out.println("both side");
-              //  this.dataFlight.shouldHave(text("return trip"));
-            }
-           // default ->// this.dataFlight.shouldHave(text("error with parameters"));
-        }
-    }//checkData
+
+
+    @Step("Проверяем то, что данные (Туда) в Confirmation верны")
+    public void checkConfirmData(String from_p, String to_p, String date1_p,String date2_p,
+                                 String name1, String name2) {
+
+                this.booking_number.shouldBe(visible); //Проверяем что есть номер бронирования 'Booking number  ####'
+                System.out.println("ЕСТЬ НОМЕР РЕГИСТРАЦИИ");
+
+                this.flights.shouldHave(text("return Trip"));   //Проверяем тип поездки
+                System.out.println("ЕСТЬ ТИП РЕЙСА 2");
+
+                String str1 =  PassengerDetails.makeDateCorrect(date1_p); //Преобразуем дату
+                this.flights.shouldHave(text(str1.trim())); // Проверяем дату вылета
+                System.out.println("ЕСТЬ ДАТА РЕЙСА туда");
+
+                String str2 =  PassengerDetails.makeDateCorrect(date2_p); //Преобразуем дату
+                this.flights.shouldHave(text(str1.trim())); // Проверяем дату вылета
+                System.out.println("ЕСТЬ ДАТА РЕЙСА обратно");
+
+
+                this.flights.shouldHave(text(from_p));     // Проверяем город вылета
+                System.out.println("ЕСТЬ ГОРОД ОТПРАВЛЕНИЯ");
+                this.flights.shouldHave(text(to_p));      // Проверяем город прибытия
+                System.out.println("ЕСТЬ ГОРОД ПРИБЫТИЯ");
+
+                this.passengerDetails.shouldHave(text(name1+" "+name2)); // Проверяем  имя и фамилию
+                System.out.println("ЕСТЬ имя ФАМИЛИЯ и имя "+name1+" "+name2);
+                System.out.println("Данные в Confirmation верны");
+
+    }//checkConfirmData
+
 
 }//Class main
